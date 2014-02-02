@@ -97,17 +97,18 @@ EOD
 
     desc "Start the node application"
     task :start do
-      run "cd #{current_path};NODE_ENV=#{node_env} forever start #{current_path}/#{app_command}"
+      sudo "start #{upstart_job_name}"
     end
 
     desc "Stop the node application"
     task :stop do
-      run "cd #{current_path};NODE_ENV=#{node_env} forever stop #{current_path}/#{app_command}"
+      sudo "stop #{upstart_job_name}"
     end
 
     desc "Restart the node application"
     task :restart do
-      run "cd #{current_path};NODE_ENV=#{node_env} forever restart #{current_path}/#{app_command}"
+      sudo "stop #{upstart_job_name}; true"
+      sudo "start #{upstart_job_name}"
     end
   end
 
