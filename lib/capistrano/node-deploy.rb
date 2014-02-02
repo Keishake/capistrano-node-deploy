@@ -108,7 +108,8 @@ EOD
 
     desc "Restart the node application"
     task :restart do
-       run "cd #{current_path};NODE_ENV=#{node_env} forever restart #{current_path}/#{app_command}"
+       run "cd #{current_path};NODE_ENV=#{node_env} forever stop #{current_path}/#{app_command}"
+       run "cd #{current_path};NODE_ENV=#{node_env} forever start #{current_path}/#{app_command}"
     end
   end
 
