@@ -73,7 +73,7 @@ EOD
       run "cp #{release_path}/package.json #{shared_path}"
       run "cp #{release_path}/npm-shrinkwrap.json #{shared_path}" if remote_file_exists?("#{release_path}/npm-shrinkwrap.json")
       run "cd #{shared_path} && #{npm_binary} install --loglevel warn"
-      run "ln -s #{shared_path}/node_modules #{release_path}/node_modules"
+      run "ln -s #{shared_path}/node_modules #{release_path}"
     end
 
     task :check_upstart_config do
