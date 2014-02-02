@@ -39,6 +39,7 @@ Capistrano::Configuration.instance(:must_exist).load do |configuration|
 
   set :node_binary, "/usr/bin/node" unless defined? node_binary
   set :npm_binary, "/usr/bin/npm" unless defined? npm_binary
+  set :forever_binary, "/usr/local/lib/nodebrew/current/bin/forever" unless defined? forever_binary
   set :node_env, "production" unless defined? node_env
   set :node_user, "deploy" unless defined? node_user
 
@@ -60,11 +61,11 @@ respawn
 respawn limit 99 5
 
 script
-    cd #{current_path} && exec sudo -u #{node_user} NODE_ENV=#{node_env} forever start #{current_path}/#{app_command}
+    cd #{current_path} && exec sudo -u #{node_user} NODE_ENV=#{node_env} #{forever_binary} start #{current_path}/#{app_command}
 end script
 
 pre-stop script
-    cd #{current_path} && exec sudo -u #{node_user} NODE_ENV=#{node_env} forever stop #{current_path}/#{app_command}
+    cd #{current_path} && exec sudo -u #{node_user} NODE_ENV=#{node_env} #{forever_binary} stop #{current_path}/#{app_command}
 end script
 EOD
   }
