@@ -93,12 +93,12 @@ EOD
 
     desc "Start the node application"
     task :start do
-      run "cd #{release_path};NODE_ENV=#{node_env} forever start #{release_path}/#{app_command}"
+      run "cd #{release_path};NODE_ENV=#{node_env} forever start #{deploy_to}/current/#{app_command}"
     end
 
     desc "Stop the node application"
     task :stop do
-      run "cd #{release_path};NODE_ENV=#{node_env} forever stop #{release_path}/#{app_command}"
+      run "cd #{release_path};NODE_ENV=#{node_env} forever stop #{deploy_to}/current/#{app_command}"
     end
 
     desc "Restart the node application"
