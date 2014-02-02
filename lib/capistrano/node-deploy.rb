@@ -60,7 +60,11 @@ respawn
 respawn limit 99 5
 
 script
-    cd #{current_path} && exec sudo -u #{node_user} NODE_ENV=#{node_env} #{app_environment} #{node_binary} #{current_path}/#{app_command} 2>> #{stderr_log_path} 1>> #{stdout_log_path}
+    cd #{current_path} && exec sudo -u #{node_user} NODE_ENV=#{node_env} forever start #{current_path}/#{app_command}
+end script
+
+pre-stop script
+    cd #{current_path} && exec sudo -u #{node_user} NODE_ENV=#{node_env} forever stop #{current_path}/#{app_command}
 end script
 EOD
   }
